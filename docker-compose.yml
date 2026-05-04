@@ -1,0 +1,15 @@
+services:
+  moodify:
+    build: .
+    image: moodify-poc:latest
+    ports:
+      - "8501:8501"
+    environment:
+      # Opcional: credenciales Spotify (recomendaciones reales)
+      SPOTIPY_CLIENT_ID: ${SPOTIPY_CLIENT_ID:-}
+      SPOTIPY_CLIENT_SECRET: ${SPOTIPY_CLIENT_SECRET:-}
+      # Opcional: mercado ISO para búsqueda (AR, ES, US…)
+      SPOTIFY_MARKET: ${SPOTIFY_MARKET:-US}
+      # Por defecto no se llama a /v1/recommendations (404 en muchas apps). Poner 1 solo si tu app tiene acceso.
+      SPOTIFY_TRY_RECOMMENDATIONS: ${SPOTIFY_TRY_RECOMMENDATIONS:-0}
+    restart: unless-stopped
